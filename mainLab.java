@@ -25,14 +25,16 @@ public class mainLab {
             for(int j = 0; j < labirinto[i].length; j++){                       //Gerador de colunas
                 if (j == 0 || j == 11) {                                        //Posicionador de barras verticais, delimitando o espaço do labirinto
                     labirinto[i][j] = "|";
-                }else if(labirinto[i][j] == null){                              //Posicionador dos caracteres chamado pelo classe Random que escolhe entre "." e "#"
+                }else if(labirinto[i][j] == null && labirinto[i][j] != " P " && labirinto[i][j] != " S "){                              //Posicionador dos caracteres chamado pelo classe Random que escolhe entre "." e "#"
                     Random random = new Random();
                     labirinto[i][j] = carac[random.nextInt(carac.length)]; 
-                    if (labirinto[i][j].equals(" # ")) {               //Contador de jogos da velha
+                    if (labirinto[i][j].equals(" # ")) {                        //Contador de jogos da velha
                         count++;
                         if (count == 8) {                                       //Limitador de jogos da velha, neste caso, uma linha pode conter, até, 8 jogos da velha. 
-                            for(int k = j; k < labirinto.length; k++){
-                                labirinto[i][k] = " . ";	
+                            for(int k = j + 1; k < labirinto[i].length; k++){
+                                if (labirinto[i][k] == null || (!labirinto[i][k].equals(" P ") && !labirinto[i][k].equals(" S "))){
+                                    labirinto[i][k] = " . ";
+                                }
                             }
                             count = 0;
                         }
